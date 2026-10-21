@@ -1,17 +1,17 @@
 ---
-name: med-implement-task
-description: 'Implement an Azure DevOps task from its saved plan: read <repo>\Task_<id>\PLAN_Task_<id>_*.md (written by /med-task-workflow:med-plan-task), re-check the work item, implement step by step following the repo skills, build into the scratchpad, run/extend the Verify*.ps1 tests, self-review, update the feature docs + HTML twins, and append "Verified results" to the plan (then regenerate its HTML). Use when the user types /med-task-workflow:med-implement-task <id> or asks to "implement task <id>" / "build the plan for <id>".'
+name: implement-task
+description: 'Implement an Azure DevOps task from its saved plan: read <repo>\Task_<id>\PLAN_Task_<id>_*.md (written by /med:plan-task), re-check the work item, implement step by step following the repo skills, build into the scratchpad, run/extend the Verify*.ps1 tests, self-review, update the feature docs + HTML twins, and append "Verified results" to the plan (then regenerate its HTML). Use when the user types /med:implement-task <id> or asks to "implement task <id>" / "build the plan for <id>".'
 argument-hint: '<work item number>, e.g. 38651'
 ---
 
-# /med-task-workflow:med-implement-task <id>
+# /med:implement-task <id>
 
 The argument is the Azure DevOps work item number. No number → ask for it.
 
 ## 1. Load the plan (stop if it is missing)
 
 - Repo root = the git top level of the current directory (`git rev-parse --show-toplevel`).
-- Find `<root>\${user_config.task_folder}\PLAN_Task_<id>_*.md`. If none exists, say so and suggest `/med-task-workflow:med-plan-task <id>`; do not improvise a plan.
+- Find `<root>\${user_config.task_folder}\PLAN_Task_<id>_*.md`. If none exists, say so and suggest `/med:plan-task <id>`; do not improvise a plan.
   If several match, use the newest and mention the others.
 - Read the whole plan: Context, decisions, Approach steps, Files, Verification, Docs, Open items, and any "Verified results"
   (a previous run may have finished some steps — continue from there, do not redo them).
@@ -52,14 +52,14 @@ or the plan conflicts with what the code really does, stop and ask with AskUserQ
 
 Create/update the feature's developer + support runbooks (`.md`) and their standalone HTML twins exactly as the docs skill says.
 For new Markdown-only docs you can generate the HTML with
-`& "${CLAUDE_PLUGIN_ROOT}\skills\med-plan-task\md-to-html.ps1" -Markdown <md> -Kicker "Task <id>"`; for existing hand-styled HTML twins, update
+`& "${CLAUDE_PLUGIN_ROOT}\skills\plan-task\md-to-html.ps1" -Markdown <md> -Kicker "Task <id>"`; for existing hand-styled HTML twins, update
 the stale passages in place so they match the Markdown. Update any repo skill in `.github/skills` that your change makes wrong.
 
 ## 6. Close out
 
 - Append to the plan a **Verified results** section: what was implemented (files), test output summary, build result, docs updated,
   what remains unverified, and new open items. Then regenerate the plan HTML:
-  `& "${CLAUDE_PLUGIN_ROOT}\skills\med-plan-task\md-to-html.ps1" -Markdown <plan.md> -Kicker "Task <id>"`.
+  `& "${CLAUDE_PLUGIN_ROOT}\skills\plan-task\md-to-html.ps1" -Markdown <plan.md> -Kicker "Task <id>"`.
 - Give the user a short summary: changed/new files, test and build results, what still needs a live test, and ask whether to commit.
   When committing (only if asked): message `Task <id>: <work item title>`.
 

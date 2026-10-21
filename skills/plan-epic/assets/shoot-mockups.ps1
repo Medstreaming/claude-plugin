@@ -3,8 +3,8 @@
   Screenshots every 0N-*.html mockup in a folder with headless Edge, writing <name>.png next to each page.
   Each page's window size comes from <meta name="mock-size" content="W,H"> (default 1600,1200).
 .EXAMPLE
-  & "<plugin-root>\skills\med-plan-epic\assets\shoot-mockups.ps1" -Folder E:\Git\build\HIP2\Task_38723\mockups
-  & "<plugin-root>\skills\med-plan-epic\assets\shoot-mockups.ps1" -Folder ... -Only 03 -Index 1,3 -IndexOut C:\temp
+  & "<plugin-root>\skills\plan-epic\assets\shoot-mockups.ps1" -Folder E:\Git\build\HIP2\Task_38723\mockups
+  & "<plugin-root>\skills\plan-epic\assets\shoot-mockups.ps1" -Folder ... -Only 03 -Index 1,3 -IndexOut C:\temp
 #>
 param(
     [Parameter(Mandatory = $true)][string]$Folder,

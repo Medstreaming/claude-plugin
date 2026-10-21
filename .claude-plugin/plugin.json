@@ -1,5 +1,5 @@
 {
-  "name": "med-task-workflow",
+  "name": "med",
   "displayName": "Azure DevOps Task Workflow",
   "version": "1.0.0",
   "description": "Plan, implement, review and UI-test Azure DevOps work items from just their number.",

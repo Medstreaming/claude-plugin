@@ -1,10 +1,10 @@
 ---
-name: med-create-test-task
-description: 'Create an Azure DevOps "Test Task" for a main work item: read the main task, generate test cases from its description and acceptance criteria, show them as a table for Approve/Edit/Cancel, then (only after approval) create "Verify Task <id>: <title>" with description "Verify" + the main description, link it to the main task as Related, and post the test cases as a Discussion comment table. Use when the user types /med-task-workflow:med-create-test-task <id> or asks to "create a test task for <id>".'
+name: create-test-task
+description: 'Create an Azure DevOps "Test Task" for a main work item: read the main task, generate test cases from its description and acceptance criteria, show them as a table for Approve/Edit/Cancel, then (only after approval) create "Verify Task <id>: <title>" with description "Verify" + the main description, link it to the main task as Related, and post the test cases as a Discussion comment table. Use when the user types /med:create-test-task <id> or asks to "create a test task for <id>".'
 argument-hint: '<main work item number>, e.g. 38277'
 ---
 
-# /med-task-workflow:med-create-test-task <main-task-id>
+# /med:create-test-task <main-task-id>
 
 The argument is a work item number in `${user_config.ado_org_url}` (project `${user_config.ado_project}`). If none is given, ask for it.
 Nothing is created in Azure DevOps until the user explicitly approves the test cases.
@@ -52,7 +52,7 @@ Write the approved cases to `<scratchpad>/testcases_<id>.json` as an array of
 `{ "Id", "Title", "Preconditions", "Steps", "Expected" }` (plain text; use `\n` between steps), then run:
 
 ```powershell
-& "${CLAUDE_PLUGIN_ROOT}\skills\med-create-test-task\new-test-task.ps1" -Org "${user_config.ado_org_url}" -Project "${user_config.ado_project}" -MainId <id> -TestCasesJson "<scratchpad>\testcases_<id>.json"
+& "${CLAUDE_PLUGIN_ROOT}\skills\create-test-task\new-test-task.ps1" -Org "${user_config.ado_org_url}" -Project "${user_config.ado_project}" -MainId <id> -TestCasesJson "<scratchpad>\testcases_<id>.json"
 ```
 
 The script (uses an `az` token + `Invoke-RestMethod`; never pass HTML through `az.cmd`, cmd.exe breaks it):

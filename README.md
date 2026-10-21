@@ -1,15 +1,15 @@
-# med-task-workflow
+# med
 
 Claude Code plugin for the MedStreaming Azure DevOps task workflow. Every skill takes a work item number.
 
 | Command | What it does |
 |---|---|
-| `/med-task-workflow:med-plan-epic <id>` | Plan an epic: requirements, task breakdown and UI mockups |
-| `/med-task-workflow:med-plan-task <id>` | Research the repo and save a plan (Markdown + HTML) |
-| `/med-task-workflow:med-implement-task <id>` | Implement the saved plan, build, verify, update docs |
-| `/med-task-workflow:med-code-review-task <id>` | Review every git revision that references the task |
-| `/med-task-workflow:med-create-test-task <id>` | Generate test cases and create the linked Verify task |
-| `/med-task-workflow:med-play-test <id>` | Run the test cases in the real web client with Playwright |
+| `/med:plan-epic <id>` | Plan an epic: requirements, task breakdown and UI mockups |
+| `/med:plan-task <id>` | Research the repo and save a plan (Markdown + HTML) |
+| `/med:implement-task <id>` | Implement the saved plan, build, verify, update docs |
+| `/med:code-review-task <id>` | Review every git revision that references the task |
+| `/med:create-test-task <id>` | Generate test cases and create the linked Verify task |
+| `/med:play-test <id>` | Run the test cases in the real web client with Playwright |
 
 ## Bundled repo skills
 
@@ -20,8 +20,8 @@ The workflow skills refer to three MedStreaming repo skills, so they are bundled
 ## Install
 
 ```
-/plugin marketplace add <git-url-or-path-to-this-repo>
-/plugin install med-task-workflow@medstreaming
+/plugin marketplace add Medstreaming/med-task-workflow
+/plugin install med@medstreaming
 ```
 
 When the plugin is enabled Claude Code asks for the settings below; press Enter to accept each recommended default.

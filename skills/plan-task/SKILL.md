@@ -1,10 +1,10 @@
 ---
-name: med-plan-task
-description: 'Plan an Azure DevOps work item end to end from just its number: read every detail of the work item (description, acceptance criteria, comments, links, attachments) with the az CLI, research the repo read-only, ask only the decisions the code cannot settle, then save PLAN_Task_<id>_<Title>.md plus a standalone HTML twin in <repo>\Task_<id>\. Use when the user types /med-task-workflow:med-plan-task <id> or asks to "plan task <id>" / "make a plan for work item <id>".'
+name: plan-task
+description: 'Plan an Azure DevOps work item end to end from just its number: read every detail of the work item (description, acceptance criteria, comments, links, attachments) with the az CLI, research the repo read-only, ask only the decisions the code cannot settle, then save PLAN_Task_<id>_<Title>.md plus a standalone HTML twin in <repo>\Task_<id>\. Use when the user types /med:plan-task <id> or asks to "plan task <id>" / "make a plan for work item <id>".'
 argument-hint: '<work item number>, e.g. 38651'
 ---
 
-# /med-task-workflow:med-plan-task <id>
+# /med:plan-task <id>
 
 The argument is an Azure DevOps work item number in `${user_config.ado_org_url}` (project `${user_config.ado_project}`).
 If no number is given, ask for it. Do not write any product code in this command — the output is a reviewed plan.
@@ -56,7 +56,7 @@ Never claim runtime verification that has not happened.
 ## 5. Generate the standalone HTML twin
 
 ```powershell
-& "${CLAUDE_PLUGIN_ROOT}\skills\med-plan-task\md-to-html.ps1" -Markdown "<repo>\${user_config.task_folder}\PLAN_Task_<id>_<Title>.md" -Kicker "Task <id>"
+& "${CLAUDE_PLUGIN_ROOT}\skills\plan-task\md-to-html.ps1" -Markdown "<repo>\${user_config.task_folder}\PLAN_Task_<id>_<Title>.md" -Kicker "Task <id>"
 ```
 
 It writes the `.html` next to the `.md` (single file, inline CSS/JS from `assets/`, light/dark, sticky contents, copy buttons, print).

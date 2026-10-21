@@ -1,9 +1,9 @@
 ---
-name: med-plan-epic
-description: Plan an Azure DevOps Epic (or large work item) end to end, from just its number to UI mockups. Read the epic, its children and every reference (other repos/branches/commits, SharePoint docs, local installs/logs); research read-only; ask only the decisions the code cannot settle; then write a STANDALONE plan (own requirements R1..Rn, no POC/other-task references), a small task breakdown (one task per deliverable), and UI mockups built with the target app's real CSS, with a tabbed index viewer. All are saved in <repo>\Task_<id>\ with HTML versions. Use when the user types /med-task-workflow:med-plan-epic <id> or asks to "plan epic <id> with mockups" / "plan to mock".
+name: plan-epic
+description: Plan an Azure DevOps Epic (or large work item) end to end, from just its number to UI mockups. Read the epic, its children and every reference (other repos/branches/commits, SharePoint docs, local installs/logs); research read-only; ask only the decisions the code cannot settle; then write a STANDALONE plan (own requirements R1..Rn, no POC/other-task references), a small task breakdown (one task per deliverable), and UI mockups built with the target app's real CSS, with a tabbed index viewer. All are saved in <repo>\Task_<id>\ with HTML versions. Use when the user types /med:plan-epic <id> or asks to "plan epic <id> with mockups" / "plan to mock".
 ---
 
-# /med-task-workflow:med-plan-epic <id> [extra references]
+# /med:plan-epic <id> [extra references]
 
 Work item numbers live in `${user_config.ado_org_url}` (project `${user_config.ado_project}`). If no number is given, ask for it.
 **No product code is written.** The outputs are a reviewed plan, a task breakdown and mockups. Everything goes in `<repo root>\${user_config.task_folder}\`.
@@ -108,15 +108,15 @@ Do **not** create work items in Azure DevOps unless the user asks.
    - Overlays (drawer, modal) use `static-overlay`, `static-drawer` and `static-modal`. Keep the legend clear of the dialog.
 4. **Screenshot all pages:**
    ```powershell
-   & "${CLAUDE_PLUGIN_ROOT}\skills\med-plan-epic\assets\shoot-mockups.ps1" -Folder "<repo>\${user_config.task_folder}\mockups"
+   & "${CLAUDE_PLUGIN_ROOT}\skills\plan-epic\assets\shoot-mockups.ps1" -Folder "<repo>\${user_config.task_folder}\mockups"
    ```
    It uses headless Edge and each page's `mock-size`. `-Only 3,6` re-shoots selected pages. **Look at every PNG** with Read and fix overflow, clipping, wrapping, or legends overlapping content. Also check the viewer, which is narrower: `-Index 1,3` shoots `index.html#N`. The viewer frame is about 1485 px wide, so give multi-column layouts a `@media (max-width:1520px)` compact rule and `overflow-x:auto` on wide tables. Fix a page by rewriting a whole block rather than with regex surgery. Re-shoot after fixes.
 5. **Embed the PNGs in the plan** (§2.x) and list the mockups folder under §3 Files.
 
 ## 7. Generate the HTML versions and check them
 ```powershell
-& "${CLAUDE_PLUGIN_ROOT}\skills\med-plan-task\md-to-html.ps1" -Markdown "<repo>\${user_config.task_folder}\PLAN_Task_<id>_<Title>.md" -Kicker "Epic <id>"
-& "${CLAUDE_PLUGIN_ROOT}\skills\med-plan-task\md-to-html.ps1" -Markdown "<repo>\${user_config.task_folder}\TASKS_Epic_<id>_<Title>.md" -Kicker "Epic <id>"
+& "${CLAUDE_PLUGIN_ROOT}\skills\plan-task\md-to-html.ps1" -Markdown "<repo>\${user_config.task_folder}\PLAN_Task_<id>_<Title>.md" -Kicker "Epic <id>"
+& "${CLAUDE_PLUGIN_ROOT}\skills\plan-task\md-to-html.ps1" -Markdown "<repo>\${user_config.task_folder}\TASKS_Epic_<id>_<Title>.md" -Kicker "Epic <id>"
 ```
 - The converter inlines local images as base64, so each HTML is a single file. Never hand-edit the HTML; fix the Markdown and regenerate.
 - Check the result renders by screenshotting a cut-down copy of the mockups section. Expect a plan HTML with five mockups to be around 1.5–2 MB.
@@ -129,5 +129,5 @@ Give the paths (plan .md/.html, tasks .md/.html, `mockups\index.html`) and a sho
 - what each mockup shows;
 - open items.
 
-Wait for review. When implementation lands later (`/med-task-workflow:med-implement-task`), append "Verified results" to the plan and regenerate.
+Wait for review. When implementation lands later (`/med:implement-task`), append "Verified results" to the plan and regenerate.
 

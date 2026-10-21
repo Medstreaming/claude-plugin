@@ -1,10 +1,10 @@
 ---
-name: med-code-review-task
-description: 'Code-review every git revision of an Azure DevOps task from just its number: find all commits whose message references the task (Task/Bug/TASK <id>, incl. merged PRs and copies on other branches), group duplicate ports by patch-id, run /code-review on each distinct change, verify the findings, and save a prioritized CODE_REVIEW_Task_<id>_<Title>.md plus a standalone HTML twin in <repo>\Task_<id>\. Use when the user types /med-task-workflow:med-code-review-task <id> or asks to "review task <id>" / "code review all revisions of <id>".'
+name: code-review-task
+description: 'Code-review every git revision of an Azure DevOps task from just its number: find all commits whose message references the task (Task/Bug/TASK <id>, incl. merged PRs and copies on other branches), group duplicate ports by patch-id, run /code-review on each distinct change, verify the findings, and save a prioritized CODE_REVIEW_Task_<id>_<Title>.md plus a standalone HTML twin in <repo>\Task_<id>\. Use when the user types /med:code-review-task <id> or asks to "review task <id>" / "code review all revisions of <id>".'
 argument-hint: '<work item number>, e.g. 38277  [low|medium|high|xhigh|max]'
 ---
 
-# /med-task-workflow:med-code-review-task <id> [level]
+# /med:code-review-task <id> [level]
 
 The first argument is the Azure DevOps work item number (no number → ask for it). An optional second argument is the
 `/code-review` effort level; pass it through unchanged (omit it → `/code-review` reuses its last level).
@@ -18,7 +18,7 @@ two review documents in `${user_config.task_folder}\`.
   (`az login --allow-no-subscriptions` if needed). Keep the title, description, and acceptance criteria. Reviewers check the
   code against these, so a missing acceptance criterion counts as a finding.
 - If az is unavailable, take the title from the commit subject and say that the work item was not read.
-- If `<root>\${user_config.task_folder}\PLAN_Task_<id>_*.md` exists (from /med-task-workflow:med-plan-task), read it too. Deviations from the plan's decisions are findings.
+- If `<root>\${user_config.task_folder}\PLAN_Task_<id>_*.md` exists (from /med:plan-task), read it too. Deviations from the plan's decisions are findings.
 
 ## 2. Find every revision of the task
 
@@ -66,7 +66,7 @@ Layout (match `Task_38277\CODE_REVIEW_Task_38277_*.md`):
    verified (no build, no live DB or service run unless you actually did one).
 
 Then generate the HTML twin:
-`& "${CLAUDE_PLUGIN_ROOT}\skills\med-plan-task\md-to-html.ps1" -Markdown <review.md> -Kicker "Task <id>" -Badge "Code review"`.
+`& "${CLAUDE_PLUGIN_ROOT}\skills\plan-task\md-to-html.ps1" -Markdown <review.md> -Kicker "Task <id>" -Badge "Code review"`.
 
 ## 5. Report
 

@@ -4,7 +4,7 @@
   "description": "MedStreaming Claude Code plugins",
   "plugins": [
     {
-      "name": "med-task-workflow",
+      "name": "med",
       "source": "./",
       "description": "Plan, implement, review and UI-test Azure DevOps work items from just their number."
     }

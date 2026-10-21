@@ -3,7 +3,7 @@
   Converts a plan/runbook Markdown file into a standalone, single-file HTML page (inline CSS/JS, no network,
   light/dark toggle, sticky contents, copy buttons on code, print styles) using the MedStreaming runbook shell.
 .EXAMPLE
-  & "<plugin-root>\skills\med-plan-task\md-to-html.ps1" -Markdown .\Task_38651\PLAN_Task_38651_X.md -Kicker "Task 38651"
+  & "<plugin-root>\skills\plan-task\md-to-html.ps1" -Markdown .\Task_38651\PLAN_Task_38651_X.md -Kicker "Task 38651"
 #>
 param(
     [Parameter(Mandatory = $true)][string]$Markdown,

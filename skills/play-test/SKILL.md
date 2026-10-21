@@ -1,10 +1,10 @@
 ---
-name: med-play-test
-description: 'Run the test cases of an Azure DevOps task in the real web client with Playwright (Microsoft Edge): read the Verify/test task comments with the az CLI, drive the HTML5 client at http://localhost:4200/WebClient, take a screenshot per test case, and save TEST_RESULTS_Task_<id>.md + standalone HTML twin + results.json + screenshots in <repo>\Task_<id>\test\. Login is either manual (user signs in in the Edge window) or automatic with a username/password. Use when the user types /med-task-workflow:med-play-test <id> or asks to "play test / run the UI tests for task <id>".'
+name: play-test
+description: 'Run the test cases of an Azure DevOps task in the real web client with Playwright (Microsoft Edge): read the Verify/test task comments with the az CLI, drive the HTML5 client at http://localhost:4200/WebClient, take a screenshot per test case, and save TEST_RESULTS_Task_<id>.md + standalone HTML twin + results.json + screenshots in <repo>\Task_<id>\test\. Login is either manual (user signs in in the Edge window) or automatic with a username/password. Use when the user types /med:play-test <id> or asks to "play test / run the UI tests for task <id>".'
 argument-hint: '<task id> [--user <u> --pass <p> | --manual] [--url <base url>]'
 ---
 
-# /med-task-workflow:med-play-test <task-id> [--user <u> --pass <p> | --manual] [--url <base>]
+# /med:play-test <task-id> [--user <u> --pass <p> | --manual] [--url <base>]
 
 Runs the test cases of work item `<task-id>` (organization `${user_config.ado_org_url}`, project `${user_config.ado_project}`) against the
 running web client and records the evidence. Default URL: `${user_config.web_client_url}` (Angular dev server). If the user gives a
@@ -53,7 +53,7 @@ az devops invoke --area wit --resource comments --route-parameters project=${use
 - If `<id>` is a **Test Task** (`Verify Task <main>: ...`), its Discussion comment table (`TC-01 | Title | Preconditions | Steps | Expected`)
   is the test-case list.
 - If `<id>` is the **main task**, find its Related work item titled `Verify Task <id>: ...` and read that item's comments.
-- If no test cases exist, say so and offer `/med-task-workflow:med-create-test-task <id>` — do not invent cases silently.
+- If no test cases exist, say so and offer `/med:create-test-task <id>` — do not invent cases silently.
 - Also read the main task's description/technical notes (UI labels, element ids such as `ddl...`, impacted components) and, if present,
   `${user_config.task_folder}\PLAN_Task_<id>_*.md`, to learn selectors and expected behavior.
 
@@ -74,10 +74,10 @@ az devops invoke --area wit --resource comments --route-parameters project=${use
 
 ## 4. Write and run the script
 
-Write `${user_config.task_folder}\test\play_<id>.js` using the helper `${CLAUDE_PLUGIN_ROOT}\skills\med-play-test\lib\pwlib.js`:
+Write `${user_config.task_folder}\test\play_<id>.js` using the helper `${CLAUDE_PLUGIN_ROOT}\skills\play-test\lib\pwlib.js`:
 
 ```js
-const lib = require('${CLAUDE_PLUGIN_ROOT}/skills/med-play-test/lib/pwlib.js');
+const lib = require('${CLAUDE_PLUGIN_ROOT}/skills/play-test/lib/pwlib.js');
 (async () => {
   const { ctx, page } = await lib.launch({ url: '${user_config.web_client_url}', readyText: /advanced/i });
   const results = [];
@@ -115,7 +115,7 @@ Use PASS / FAIL / BLOCKED / NOT RUN with a one-line reason for anything not PASS
 with file:line, data created/restored, how to re-run), then the HTML twin:
 
 ```powershell
-& "${CLAUDE_PLUGIN_ROOT}\skills\med-plan-task\md-to-html.ps1" -Markdown "<repo>\${user_config.task_folder}\test\TEST_RESULTS_Task_<id>.md" -Kicker "Task <id> tests"
+& "${CLAUDE_PLUGIN_ROOT}\skills\plan-task\md-to-html.ps1" -Markdown "<repo>\${user_config.task_folder}\test\TEST_RESULTS_Task_<id>.md" -Kicker "Task <id> tests"
 ```
 
 Finish by telling the user the folder, the PASS/FAIL/BLOCKED counts, any defects, and whether test data still needs restoring.
