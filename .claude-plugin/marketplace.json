@@ -1,0 +1,12 @@
+{
+  "name": "medstreaming",
+  "owner": { "name": "MedStreaming" },
+  "description": "MedStreaming Claude Code plugins",
+  "plugins": [
+    {
+      "name": "med-task-workflow",
+      "source": "./",
+      "description": "Plan, implement, review and UI-test Azure DevOps work items from just their number."
+    }
+  ]
+}

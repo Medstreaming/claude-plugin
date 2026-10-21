@@ -1,0 +1,55 @@
+/* Mockup-only additions on top of HIP/wwwroot/css/dashboard.css. Anything here that ships becomes part of dashboard.css. */
+.mk-ribbon { position: fixed; right: 18px; bottom: 14px; z-index: 10000; background: #111827; color: #fff; font: 600 11px Inter, sans-serif; letter-spacing: .06em; padding: 6px 12px; border-radius: 999px; opacity: .85; }
+.mk-new { margin-left: auto; background: #7c3aed; color: #fff; font-size: 9px; font-weight: 700; letter-spacing: .05em; padding: 2px 6px; border-radius: 999px; }
+.mk-tag { display: inline-block; background: #ede9fe; color: #6d28d9; font-size: 10px; font-weight: 700; letter-spacing: .04em; padding: 2px 7px; border-radius: 999px; vertical-align: middle; margin-left: 6px; }
+.mk-note { display: inline-flex; align-items: center; justify-content: center; width: 20px; height: 20px; border-radius: 50%; background: #7c3aed; color: #fff; font: 700 11px Inter, sans-serif; margin-left: 6px; vertical-align: middle; box-shadow: 0 0 0 3px #ede9fe; }
+.mk-legend { margin-top: 18px; background: #faf5ff; border: 1px dashed #c4b5fd; border-radius: 12px; padding: 14px 18px; font-size: 12px; color: #4b5563; }
+.mk-legend b { color: #6d28d9; }
+.mk-legend ol { margin: 6px 0 0 18px; padding: 0; }
+.mk-legend li { margin: 3px 0; }
+
+/* HL7 card states (warning / critical / unavailable / not configured) */
+.hl7-card { border-left: 4px solid var(--success); }
+.hl7-card.warn { border-left-color: var(--warning); background: linear-gradient(180deg, #fffbeb, #fff 60%); }
+.hl7-card.crit { border-left-color: var(--danger); background: linear-gradient(180deg, #fef2f2, #fff 60%); }
+.hl7-card.muted { border-left-color: var(--gray-300); background: var(--gray-50); }
+.hl7-card .state { font-size: 11px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; }
+.hl7-card.warn .state { color: #b45309; } .hl7-card.crit .state { color: var(--danger); } .hl7-card .state.ok { color: var(--success); } .hl7-card.muted .state { color: var(--gray-500); }
+.thr { font-size: 11px; color: var(--gray-400); }
+.dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; margin-right: 6px; vertical-align: middle; }
+.dot.g { background: var(--success); } .dot.y { background: var(--warning); } .dot.r { background: var(--danger); } .dot.n { background: var(--gray-300); } .dot.b { background: var(--primary); }
+.depth-bar { height: 6px; border-radius: 3px; background: var(--gray-100); position: relative; margin-top: 6px; min-width: 120px; }
+.depth-bar > span { position: absolute; left: 0; top: 0; bottom: 0; border-radius: 3px; }
+.depth-bar > i { position: absolute; top: -3px; bottom: -3px; width: 2px; background: var(--gray-400); }
+.mono { font-family: Consolas, 'Cascadia Mono', monospace; font-size: 12px; }
+.muted { color: var(--gray-400); }
+.kv-grid { display: grid; grid-template-columns: 150px 1fr; gap: 6px 14px; font-size: 13px; }
+.kv-grid div:nth-child(odd) { color: var(--gray-500); }
+.timeline { list-style: none; margin: 0; padding: 0 0 0 14px; border-left: 2px solid var(--gray-200); }
+.timeline li { position: relative; padding: 0 0 14px 14px; font-size: 13px; }
+.timeline li::before { content: ''; position: absolute; left: -21px; top: 3px; width: 12px; height: 12px; border-radius: 50%; background: #fff; border: 3px solid var(--primary); }
+.timeline li.ok::before { border-color: var(--success); } .timeline li.bad::before { border-color: var(--danger); }
+.timeline small { display: block; color: var(--gray-400); font-size: 11px; }
+.rawbox { background: #0f172a; color: #e2e8f0; border-radius: 8px; padding: 12px 14px; font: 12px/1.6 Consolas, monospace; white-space: pre-wrap; word-break: break-all; }
+.audit-note { background: var(--warning-light); color: #92400e; border-radius: 8px; padding: 8px 12px; font-size: 12px; }
+.rate { text-align: center; }
+.rate .ringwrap { position: relative; width: 110px; height: 110px; margin: 0 auto; }
+.rate .ringwrap .c { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+.rate .ringwrap .c b { font-size: 22px; color: var(--gray-800); } .rate .ringwrap .c span { font-size: 10px; color: var(--gray-400); letter-spacing: .06em; }
+.rate .lbl { font-size: 13px; font-weight: 600; margin-top: 6px; } .rate .avg { font-size: 11px; color: var(--gray-500); }
+.static-overlay { position: fixed; inset: 0; background: rgba(17, 24, 39, .45); z-index: 9998; display: flex; align-items: center; justify-content: center; }
+.static-drawer { position: fixed; top: 0; right: 0; bottom: 0; width: 560px; background: #fff; z-index: 9999; box-shadow: -10px 0 30px rgba(0,0,0,.15); display: flex; flex-direction: column; }
+.static-drawer header { padding: 18px 22px; border-bottom: 1px solid var(--gray-100); display: flex; align-items: center; justify-content: space-between; }
+.static-drawer .body { padding: 18px 22px; overflow: hidden; display: flex; flex-direction: column; gap: 18px; }
+.static-modal { background: #fff; border-radius: 14px; width: 560px; box-shadow: var(--shadow-lg); overflow: hidden; }
+.static-modal header { padding: 18px 22px; border-bottom: 1px solid var(--gray-100); }
+.static-modal .body { padding: 18px 22px; display: flex; flex-direction: column; gap: 14px; font-size: 13px; }
+.static-modal footer { padding: 14px 22px; background: var(--gray-50); display: flex; justify-content: flex-end; gap: 10px; }
+textarea.mk-input, input.mk-input { width: 100%; border: 1px solid var(--gray-300); border-radius: 8px; padding: 9px 12px; font: 13px Inter, sans-serif; box-sizing: border-box; }
+.proc-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+.proc-stat { background: var(--gray-50); border-radius: 10px; padding: 12px 14px; }
+.proc-stat .v { font-size: 20px; font-weight: 700; color: var(--gray-800); } .proc-stat .l { font-size: 11px; color: var(--gray-500); }
+
+/* Keep badges and masked identifiers on one line when the page is shown in the index frame. */
+.badge-status, .table-custom td.mono, .table-custom td:nth-child(n) .mono { white-space: nowrap; }
+.nowrap-table td { white-space: nowrap; }

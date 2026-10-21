@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>UI Mockups</title>
+<link href="../../HIP/wwwroot/lib/inter-font/inter.css" rel="stylesheet">
+<link rel="stylesheet" href="../../HIP/wwwroot/lib/bootstrap-icons/font/bootstrap-icons.min.css">
+<style>
+  :root { --bar: #0f172a; --bar-2: #1e293b; --line: #334155; --txt: #e2e8f0; --dim: #94a3b8; --accent: #1a56db; --mark: #7c3aed; }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; height: 100%; background: var(--bar); font-family: Inter, system-ui, sans-serif; }
+  body { display: flex; flex-direction: column; }
+  header { background: var(--bar); color: var(--txt); border-bottom: 1px solid var(--line); flex: none; }
+  .top { display: flex; align-items: center; gap: 14px; padding: 10px 18px 0; }
+  .brand { display: flex; align-items: center; gap: 10px; font-weight: 700; font-size: 15px; white-space: nowrap; }
+  .brand .ico { width: 30px; height: 30px; border-radius: 8px; background: linear-gradient(135deg, #14b8a6, #0d9488); display: grid; place-items: center; color: #fff; }
+  .brand small { display: block; font-weight: 500; font-size: 11px; color: var(--dim); }
+  .tag { background: #ede9fe; color: #6d28d9; font-size: 10px; font-weight: 700; letter-spacing: .05em; padding: 3px 8px; border-radius: 999px; }
+  .spacer { flex: 1; }
+  .btn { display: inline-flex; align-items: center; gap: 6px; background: var(--bar-2); color: var(--txt); border: 1px solid var(--line); border-radius: 8px; padding: 6px 11px; font: 500 12.5px Inter, sans-serif; cursor: pointer; text-decoration: none; }
+  .btn:hover { border-color: #475569; background: #273449; }
+  .btn:disabled { opacity: .4; cursor: default; }
+  nav { display: flex; gap: 2px; padding: 10px 14px 0; overflow-x: auto; scrollbar-width: none; }
+  nav::-webkit-scrollbar { display: none; }
+  .tab { display: flex; align-items: center; gap: 9px; padding: 9px 14px 11px; color: var(--dim); background: none; border: none; border-bottom: 3px solid transparent; font: 500 13px Inter, sans-serif; cursor: pointer; white-space: nowrap; border-radius: 8px 8px 0 0; }
+  .tab:hover { color: var(--txt); background: var(--bar-2); }
+  .tab .n { width: 22px; height: 22px; border-radius: 50%; display: grid; place-items: center; font-size: 11px; font-weight: 700; background: var(--bar-2); border: 1px solid var(--line); color: var(--dim); }
+  .tab .meta { display: block; font-size: 10.5px; color: #64748b; font-weight: 500; margin-top: 1px; }
+  .tab.active { color: #fff; border-bottom-color: var(--accent); background: var(--bar-2); }
+  .tab.active .n { background: var(--mark); border-color: var(--mark); color: #fff; }
+  .info { display: flex; align-items: center; gap: 10px; padding: 8px 18px; background: var(--bar-2); color: var(--dim); font-size: 12.5px; border-top: 1px solid var(--line); }
+  .info b { color: var(--txt); font-weight: 600; }
+  .info .req { margin-left: auto; white-space: nowrap; }
+  .info kbd { background: var(--bar); border: 1px solid var(--line); border-radius: 4px; padding: 0 5px; font: 11px Consolas, monospace; color: var(--txt); }
+  main { flex: 1; min-height: 0; background: #f3f4f6; }
+  iframe { width: 100%; height: 100%; border: 0; display: block; background: #f3f4f6; }
+  @media (max-width: 900px) { .tab .meta, .info .req, .brand small { display: none; } }
+</style>
+<script src="mock-config.js"></script>
+</head>
+<body>
+<header>
+  <div class="top">
+    <div class="brand"><span class="ico"><i class="bi bi-heart-pulse"></i></span>
+      <div id="ttl"></div></div>
+    <span class="tag">MOCKUP</span>
+    <span class="spacer"></span>
+    <button class="btn" id="prev" title="Previous (←)"><i class="bi bi-chevron-left"></i></button>
+    <button class="btn" id="next" title="Next (→)"><i class="bi bi-chevron-right"></i></button>
+    <a class="btn" id="solo" target="_blank" rel="noopener" title="Open this mockup on its own"><i class="bi bi-box-arrow-up-right"></i> Open alone</a>
+    <a class="btn" id="planLink" target="_blank" rel="noopener"><i class="bi bi-journal-text"></i> Plan</a>
+  </div>
+  <nav id="tabs" role="tablist"></nav>
+  <div class="info"><span id="desc"></span><span class="req" id="req"></span></div>
+</header>
+<main><iframe id="view" title="Mockup"></iframe></main>
+<script>
+  var M = window.MOCK || {}, pages = M.pages || [];
+  document.getElementById('ttl').innerHTML = (M.title || 'UI Mockups') + '<small>' + (M.epic || '') + ' · ' + ((M.app || {}).name || '') + ' ' + ((M.app || {}).sub || '') + '</small>';
+  if (M.plan) document.getElementById('planLink').href = M.plan; else document.getElementById('planLink').style.display = 'none';
+  var tabs = document.getElementById('tabs'), view = document.getElementById('view'), cur = -1;
+  pages.forEach(function (p, i) {
+    var b = document.createElement('button');
+    b.className = 'tab'; b.setAttribute('role', 'tab'); b.title = p.name + ' (' + (i + 1) + ')';
+    b.innerHTML = '<span class="n">' + (i + 1) + '</span><span>' + p.name + '<span class="meta">' + p.meta + '</span></span>';
+    b.onclick = function () { show(i); };
+    tabs.appendChild(b);
+  });
+  function show(i) {
+    i = Math.max(0, Math.min(pages.length - 1, i));
+    if (i === cur) return;
+    cur = i;
+    var p = pages[i];
+    [].forEach.call(tabs.children, function (t, k) { t.classList.toggle('active', k === i); t.setAttribute('aria-selected', k === i); });
+    tabs.children[i].scrollIntoView({ block: 'nearest', inline: 'nearest' });
+    view.src = p.file;
+    document.getElementById('solo').href = p.file;
+    document.getElementById('desc').innerHTML = p.desc;
+    document.getElementById('req').textContent = 'Requirements: ' + p.req + '   ·   ← → or 1–' + pages.length + ' to switch';
+    document.getElementById('prev').disabled = i === 0;
+    document.getElementById('next').disabled = i === pages.length - 1;
+    document.title = (i + 1) + '. ' + p.name + ' · ' + (M.title || 'UI Mockups');
+    if (location.hash !== '#' + (i + 1)) history.replaceState(null, '', '#' + (i + 1));
+  }
+  document.getElementById('prev').onclick = function () { show(cur - 1); };
+  document.getElementById('next').onclick = function () { show(cur + 1); };
+  function onKey(e) {
+    if (e.target && /input|textarea|select/i.test(e.target.tagName)) return;
+    if (e.key === 'ArrowLeft') show(cur - 1);
+    else if (e.key === 'ArrowRight') show(cur + 1);
+    else if (/^[1-9]$/.test(e.key) && +e.key <= pages.length) show(+e.key - 1);
+  }
+  document.addEventListener('keydown', onKey);
+  // Keep arrow keys working after clicking inside the mockup (same-origin file pages; ignored if the browser blocks it).
+  view.addEventListener('load', function () { try { view.contentWindow.document.addEventListener('keydown', onKey); } catch (e) {} });
+  window.addEventListener('hashchange', function () { show((parseInt(location.hash.slice(1), 10) || 1) - 1); });
+  show((parseInt(location.hash.slice(1), 10) || 1) - 1);
+</script>
+</body>
+</html>

@@ -1,0 +1,59 @@
+{
+  "name": "med-task-workflow",
+  "displayName": "Azure DevOps Task Workflow",
+  "version": "1.0.0",
+  "description": "Plan, implement, review and UI-test Azure DevOps work items from just their number.",
+  "author": { "name": "MedStreaming" },
+  "keywords": ["azure-devops", "planning", "code-review", "testing"],
+  "userConfig": {
+    "ado_org_url": {
+      "type": "string",
+      "title": "Azure DevOps organization URL",
+      "description": "Organization that holds your work items",
+      "default": "https://dev.azure.com/medstreaming2"
+    },
+    "ado_project": {
+      "type": "string",
+      "title": "Azure DevOps project",
+      "description": "Project name inside the organization",
+      "default": "Medstreaming"
+    },
+    "task_folder": {
+      "type": "string",
+      "title": "Task output folder",
+      "description": "Folder under the repo root where plans, reviews and test results are saved. Use <id> for the work item number.",
+      "default": "Task_<id>"
+    },
+    "web_client_url": {
+      "type": "string",
+      "title": "Web client URL (play-test)",
+      "description": "Address of the running web client that /play-test drives",
+      "default": "http://localhost:4200/WebClient"
+    },
+    "browser_channel": {
+      "type": "string",
+      "title": "Browser for play-test",
+      "description": "Installed browser Playwright uses",
+      "options": ["msedge", "chrome"],
+      "default": "msedge"
+    },
+    "demo_data_folder": {
+      "type": "string",
+      "title": "Local demo-data folder (plan-epic)",
+      "description": "Local install or sample-data folder that /plan-epic may inspect (masked patterns only)",
+      "default": "C:\\Medstreaming\\demomode"
+    },
+    "sql_server": {
+      "type": "string",
+      "title": "SQL Server instance (play-test)",
+      "description": "Instance play-test queries for test data",
+      "default": "."
+    },
+    "sql_database": {
+      "type": "string",
+      "title": "SQL database (play-test)",
+      "description": "Database play-test queries for test data",
+      "default": "MedStreaming"
+    }
+  }
+}
