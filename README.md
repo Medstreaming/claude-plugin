@@ -20,7 +20,7 @@ The workflow skills refer to three MedStreaming repo skills, so they are bundled
 ## Install
 
 ```
-/plugin marketplace add Medstreaming/med-task-workflow
+/plugin marketplace add Medstreaming/claude-plugin
 /plugin install med@medstreaming
 ```
 
