@@ -1,0 +1,45 @@
+<section id="commands" data-transition="fade" style="background:#F4F8FB;color:#002F49;font-family:'DM Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:48px">
+<div style="position:absolute;left:0px;top:0px;width:24px;height:270px;background:#002F49"></div>
+<div style="position:absolute;left:0px;top:270px;width:24px;height:270px;background:#0097DC"></div>
+<div style="position:absolute;left:0px;top:540px;width:24px;height:270px;background:#F5B800"></div>
+<div style="position:absolute;left:0px;top:810px;width:24px;height:270px;background:#72BF44"></div>
+<img src="__LOGO_URL__" alt="Medstreaming logo" style="position:absolute;left:1492px;top:28px;width:300px;height:90px;object-fit:contain">
+<div style="display:flex;flex-direction:column;gap:20px;align-items:flex-start">
+<p style="font-size:24px;font-weight:700;background:#F5B800;color:#002F49;padding:8px 22px;border-radius:999px;letter-spacing:2px;text-transform:uppercase">The commands</p>
+<h2 style="font-family:'Space Grotesk', Arial, sans-serif;font-size:68px;font-weight:700;line-height:1.08;color:#002F49">Six commands cover the lifecycle</h2>
+</div>
+<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:32px">
+<div style="display:flex;flex-direction:column;gap:10px;background:#FFFFFF;padding:32px;border:3px solid #002F49;border-radius:12px;box-shadow:8px 8px 0 #0097DC">
+<p style="font-size:24px;font-weight:700;color:#0072A8">1 · Plan</p>
+<p style="font-size:30px;font-weight:600;font-family:'JetBrains Mono', 'Courier New', monospace;color:#002F49">/med:plan-epic</p>
+<p style="font-size:26px;line-height:1.35;color:#3E5566">Epic to requirements, task breakdown and UI mockups.</p>
+</div>
+<div style="display:flex;flex-direction:column;gap:10px;background:#FFFFFF;padding:32px;border:3px solid #002F49;border-radius:12px;box-shadow:8px 8px 0 #0097DC">
+<p style="font-size:24px;font-weight:700;color:#0072A8">2 · Plan</p>
+<p style="font-size:30px;font-weight:600;font-family:'JetBrains Mono', 'Courier New', monospace;color:#002F49">/med:plan-task</p>
+<p style="font-size:26px;line-height:1.35;color:#3E5566">Work item to a reviewed plan, saved as Markdown and HTML.</p>
+</div>
+<div style="display:flex;flex-direction:column;gap:10px;background:#FFFFFF;padding:32px;border:3px solid #002F49;border-radius:12px;box-shadow:8px 8px 0 #F5B800">
+<p style="font-size:24px;font-weight:700;color:#7A5C00">3 · Build</p>
+<p style="font-size:30px;font-weight:600;font-family:'JetBrains Mono', 'Courier New', monospace;color:#002F49">/med:implement-task</p>
+<p style="font-size:26px;line-height:1.35;color:#3E5566">Builds the saved plan, runs the verify scripts, updates the docs.</p>
+</div>
+<div style="display:flex;flex-direction:column;gap:10px;background:#FFFFFF;padding:32px;border:3px solid #002F49;border-radius:12px;box-shadow:8px 8px 0 #72BF44">
+<p style="font-size:24px;font-weight:700;color:#3C7A1C">4 · Review</p>
+<p style="font-size:30px;font-weight:600;font-family:'JetBrains Mono', 'Courier New', monospace;color:#002F49">/med:code-review-task</p>
+<p style="font-size:26px;line-height:1.35;color:#3E5566">Finds every commit for the task and reviews each distinct change.</p>
+</div>
+<div style="display:flex;flex-direction:column;gap:10px;background:#FFFFFF;padding:32px;border:3px solid #002F49;border-radius:12px;box-shadow:8px 8px 0 #002F49">
+<p style="font-size:24px;font-weight:700;color:#002F49">5 · Test</p>
+<p style="font-size:30px;font-weight:600;font-family:'JetBrains Mono', 'Courier New', monospace;color:#002F49">/med:create-test-task</p>
+<p style="font-size:26px;line-height:1.35;color:#3E5566">Test cases from the criteria, then a linked Verify task.</p>
+</div>
+<div style="display:flex;flex-direction:column;gap:10px;background:#FFFFFF;padding:32px;border:3px solid #002F49;border-radius:12px;box-shadow:8px 8px 0 #002F49">
+<p style="font-size:24px;font-weight:700;color:#002F49">6 · Test</p>
+<p style="font-size:30px;font-weight:600;font-family:'JetBrains Mono', 'Courier New', monospace;color:#002F49">/med:play-test</p>
+<p style="font-size:26px;line-height:1.35;color:#3E5566">Runs the cases in the web client with a screenshot for each.</p>
+</div>
+</div>
+<p style="position:absolute;left:128px;bottom:64px;width:900px;font-size:24px;color:#5A6E7E">Med task workflow · 4</p>
+<aside>Walk through left to right, top to bottom. plan-epic is for large items; plan-task is the everyday entry point. Every command takes only the work item number.</aside>
+</section>
