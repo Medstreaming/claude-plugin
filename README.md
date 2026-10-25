@@ -10,6 +10,7 @@ Claude Code plugin for the MedStreaming Azure DevOps task workflow. Every skill 
 | `/med:code-review-task <id>` | Review every git revision that references the task |
 | `/med:create-test-task <id>` | Generate test cases and create the linked Verify task |
 | `/med:play-test <id>` | Run the test cases in the real web client with Playwright |
+| `/med:medstyle-presentation <topic>` | Build a Medstreaming-branded slide deck (logo, palette, house layouts) |
 
 ## Bundled repo skills
 
